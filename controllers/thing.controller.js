@@ -49,7 +49,7 @@ module.exports.updateThing = async (req, res, next) => {
       body,
       params: { thingId },
     } = req;
-    const [thing] = await Thing.updateByPk(thingId, body);
+    const thing = await Thing.updateByPk(thingId, body);
     if (thing) {
       return res.status(203).send({ data: thing });
     }

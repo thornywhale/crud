@@ -9,15 +9,16 @@ class Thing {
 
   static async create(values) {
     try {
-      const insertedAttr = Object.entries(this.attr)
+      const insertedAttr = Object.entries(this.attributes)
         .filter(([attr]) => attr in values)
         .map(([attr]) => attr);
       const columns = insertedAttr.map((attr) => `"${attr}"`).join(",");
+      console.log("---------------------------", columns);
       const insertingValues = insertedAttr
         .map((attr) => {
           const value = values[attr];
           const dataType = typeof this.attributes[attr];
-          return dataType === "string" ? `"${value}"` : value;
+          return dataType === "string" ? `'${value}'` : value;
         })
         .join(",");
       const { rows } = await this.client.query(`
@@ -54,21 +55,22 @@ class Thing {
   }
   static async updateByPk(pk, values) {
     try {
-      const insertedAttr = Object.entries(this.attr)
+      const insertedAttr = Object.entries(this.attributes)
         .filter(([attr]) => attr in values)
         .map(([attr]) => attr);
       let setRow = insertedAttr
         .map((attr) => {
           const value = values[attr];
           const dataType = typeof this.attributes[attr];
-          const stringValue = dataType === 'string' ? `'${value}'` : value;
-          return stringPair = `"${attr}"=${stringValue}`;
+          const stringValue = dataType === "string" ? `'${value}'` : value;
+          const stringPair = `"${attr}"=${stringValue}`;
+          return stringPair;
         })
         .join(",");
       if ("updatedAt" in values) {
         console.log(values["updatedAt"]);
       } else {
-        setRow += `,"updatedAt"="${new Date().toISOString()}"`;
+        setRow += `,"updatedAt"='${new Date().toISOString()}'`;
       }
       const { rows } = await this.client.query(`
       UPDATE ${this.tableName}

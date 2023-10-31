@@ -1,8 +1,6 @@
-PUT http://localhost:3000/things/1 HTTP/1.1
+PUT http://localhost:3000/things/6 HTTP/1.1
 Content-Type: application/json
 
 {
-  "body": "new text",
-  "updatedAt": "today",
-  "createdAt": "456"
+  "body": "new text for 6"
 }
