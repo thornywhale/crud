@@ -1,0 +1,17 @@
+{
+  "development": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "crud_db",
+    "user": "postgres",
+    "password": "postgres"
+  },
+  "test": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "crud_db_test",
+    "user": "postgres",
+    "password": "postgres"
+  },
+  "production": {}
+}
